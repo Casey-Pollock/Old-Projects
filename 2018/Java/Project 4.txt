@@ -1,0 +1,81 @@
+//Casey Pollock
+
+import java.util.*;
+
+public class DateChecker {
+
+	public static void main(String[] args) {
+
+		Scanner kbd = new Scanner(System.in);
+		String date, month, day, year; int monthInt, dayInt, yearInt;
+		
+		System.out.println("Enter a date mm/dd/yyyy");
+		date = kbd.nextLine();
+		
+		//Cheking length of date.
+		if (date.length() == 10) {
+		    
+		    //Checking location of /
+		    if (date.indexOf("/") == 2 && date.lastIndexOf("/") == 5) {
+		        
+		        //month day and year check
+		        month = date.substring(0,2);
+		        day = date.substring(3,5);
+		        year = date.substring(6);
+		        monthInt = Integer.decode(month);
+		        dayInt = Integer.decode(day);
+		        yearInt = Integer.decode(year);
+	            if (monthInt == 1 || monthInt==3||monthInt==5||monthInt==7||monthInt==8||monthInt==10||monthInt==12) {
+	                if(dayInt<32 && 0<dayInt)
+	                    System.out.println("Valid date.");
+	                else
+	                    System.out.println("Not a valid date.\nDay is not valid");
+	            }
+	            else{
+	                if(monthInt==4||monthInt==6||monthInt==9||monthInt==11){
+	                     if(dayInt<31 && 0<dayInt)
+	                        System.out.println("Valid date.");
+	                    else
+	                        System.out.println("Not a valid date.\nDay is not valid");
+	                }
+	                else{
+	                    if(monthInt==2){
+	                        if(dayInt<29 && 0<dayInt)
+								System.out.println("Valid date.");
+							else{
+								if(dayInt==29){
+									if(yearInt/400)
+										System.out.println("Valid date.");
+									else{
+										if(yearInt/100)
+											System.out.println("Not a valid date.\nYear is not valid");
+										else{
+											if(yearInt/4)
+											    System.out.println("Valid date.");
+											else
+											    System.out.println("Not a Valid date.\nYear is not valid")
+										}
+									}
+								}
+								else
+									System.out.println("Not a valid date.\nYear is not valid");
+							}
+	                    else
+							System.out.println("Not a valid date.\nMonth not valid");
+	                }
+	            }
+		    }
+		    else {
+		        System.out.println("Not a valid date.\nIncorrect Format");
+		    }    
+		}
+		else {
+		    if (date.length() < 10)
+		        System.out.println("Not a valid date.\nToo few characters in the date");
+		    else
+		        System.out.println("Not a valid date.\nToo many characters in the date");
+		}
+		
+		kbd.close();
+	}
+}
